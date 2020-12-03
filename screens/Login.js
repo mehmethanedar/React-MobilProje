@@ -20,6 +20,7 @@ export default class DetailsScreen extends React.Component {
           title="Go to Details... again"
           onPress={() => navigation.push('Home')}
         />
+        <Button title="Go back" onPress={() => navigation.goBack()} />
       </View>
     );
   }
