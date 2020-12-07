@@ -40,7 +40,7 @@ class firstScreenStack extends React.Component {
               />,
 
             headerStyle: {
-              backgroundColor: '#f4511e', //Set Header color
+              backgroundColor: '#4bae32', //Set Header color
             },
             headerTintColor: '#fff', //Set Header text color
             headerTitleStyle: {
@@ -62,7 +62,7 @@ function MyDrawer() {
     <Drawer.Navigator
       initialRouteName="Home"
       drawerContentOptions={{
-        activeTintColor: '#e91e63'
+        activeTintColor: '#4bae32'
       }}
       drawerContent={props => <CustomDrawerContent {...props} />}>
       <Drawer.Screen name="Ana Sayfa" component={firstScreenStack} />
