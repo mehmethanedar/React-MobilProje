@@ -19,11 +19,11 @@ export default class Iletisim extends React.Component {
                 </View>
                 <View style={styles.row}>
                     <FontAwesome5 name='map-marked-alt' size={40} style={styles.awesome} />
-                    <Text style={styles.txt}>
-                        <TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={styles.txt}>
                             Haritada Göster
-                        </TouchableOpacity>
-                    </Text>
+                        </Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.row}>
                     <FontAwesome5 name='phone' size={40} style={styles.awesome} />
@@ -44,8 +44,8 @@ export default class Iletisim extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 4, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor:'red' },
-    row: { flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor:'yellow', height:300 },
-    awesome: { flexDirection: 'row', width: 50 ,margin:10,backgroundColor:'blue'},
-    txt: { margin: 10, fontFamily: 'Arial', width: 200 ,backgroundColor:'green'},
+    container: { flex: 4, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: 'red' },
+    row: { flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'yellow', height: 300 },
+    awesome: { flexDirection: 'row', width: 50, margin: 10, backgroundColor: 'blue' },
+    txt: { margin: 10, width: 200, backgroundColor: 'green' },
 });
