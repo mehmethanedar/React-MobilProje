@@ -21,7 +21,7 @@ const Drawer = createDrawerNavigator();
 
 class firstScreenStack extends React.Component {
   render() {
-    const { navigation,page } = this.props;
+    const { navigation } = this.props;
     return (
       <Stack.Navigator initialRouteName="FirstPage">
         <Stack.Screen
