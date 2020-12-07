@@ -1,28 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet,Button, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import { View, Text } from 'react-native';
 
-export default class HomeScreen extends React.Component {
+export default class Home extends React.Component {
 
-  constructor(props){
-    super(props);
-  }
-
-  render(){
-
-    const {navigation}=this.props;
-    
+  render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Details"
-          onPress={() => navigation.navigate('Login')}
-        />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Ana sayfamız burası</Text>
       </View>
+      /*
+      <Button
+            title="Open drawer"
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+          />
+          <Button
+            title="Toggle drawer"
+            onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+          />
+      */
     );
   }
 }
