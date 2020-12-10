@@ -16,7 +16,14 @@ export default function CustomDrawerContent(props) {
                 <Text style={styles.isim}>Mehmet HANEDAR</Text>
                 <Text>mehmethanedar@hotmail.com</Text>
             </View>
-            <DrawerItemList {...props} />            
+            <View style={{ height: 1, width: '100%', backgroundColor: 'black', opacity: .2 }} />
+
+            <DrawerItemList {...props} />
+            <View style={{ height: 1, width: '100%', backgroundColor: 'black', opacity: .2 }} />
+            <DrawerItem
+                label="Visit Us"
+                onPress={() => props.navigation.navigate('Sepetim')}
+            />
         </DrawerContentScrollView>
     );
 }

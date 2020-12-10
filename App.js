@@ -8,8 +8,8 @@ import {
   createDrawerNavigator,
 } from '@react-navigation/drawer';
 
-import Iletisim from './screens/Iletisim.js';
-import Sepetim from './screens/Sepetim.js';
+import Contact from './screens/Contact.js';
+import Cart from './screens/Cart.js';
 import Home from './screens/Home.js';
 import Login from './screens/Login.js';
 import CustomDrawerContent from './components/CustomDrawerContent.js';
@@ -18,42 +18,72 @@ import NavigationDrawerStructure from './components/NavigationDrawerStructure.js
 
 const Drawer = createDrawerNavigator();
 
+function StackTemplate(navigation, screen) {
+  return (
+    <Stack.Navigator initialRouteName="FirstPage">
+      <Stack.Screen
+        name="FirstPage"
+        component={screen}
+        options={{
+          title: 'Triliya', //Set Header Title
 
-class firstScreenStack extends React.Component {
+          headerLeft: () =>
+            <NavigationDrawerStructure
+              navigationProps={navigation}
+            />,
+          headerRight: () =>
+            <NavigationDrawerOrder
+              navigationProps={navigation}
+            />,
+
+          headerStyle: {
+            backgroundColor: '#4bae32', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold', //Set Header text style
+          },
+        }}
+      />
+
+    </Stack.Navigator>
+  );
+}
+
+class LoginScreenStack extends React.Component {
   render() {
     const { navigation } = this.props;
     return (
-      <Stack.Navigator initialRouteName="FirstPage">
-        <Stack.Screen
-          name="FirstPage"
-          component={Home}
-          options={{
-            title: 'Triliya', //Set Header Title
-
-            headerLeft: () =>
-              <NavigationDrawerStructure
-                navigationProps={navigation}
-              />,
-            headerRight: () =>
-              <NavigationDrawerOrder
-                navigationProps={navigation}
-              />,
-
-            headerStyle: {
-              backgroundColor: '#4bae32', //Set Header color
-            },
-            headerTintColor: '#fff', //Set Header text color
-            headerTitleStyle: {
-              fontWeight: 'bold', //Set Header text style
-            },
-          }}
-        />
-
-      </Stack.Navigator>
+      StackTemplate(navigation, Login)
     );
-
   }
+}
 
+class ContactScreenStack extends React.Component {
+  render() {
+    const { navigation } = this.props;
+    return (
+      StackTemplate(navigation, Contact)
+    );
+  }
+}
+
+class CartScreenStack extends React.Component {
+  render() {
+    const { navigation } = this.props;
+    return (
+      StackTemplate(navigation, Cart)
+    );
+  }
+}
+
+class HomeScreenStack extends React.Component {
+  render() {
+    const { navigation } = this.props;
+    return (
+      StackTemplate(navigation, Home)
+    );
+  }
 }
 
 
@@ -65,10 +95,10 @@ function MyDrawer() {
         activeTintColor: '#4bae32'
       }}
       drawerContent={props => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Ana Sayfa" component={firstScreenStack} />
-      <Drawer.Screen name="Sepetim" component={Sepetim} />
-      <Drawer.Screen name="Iletisim" component={Iletisim} />
-      <Drawer.Screen name="Login" component={Login} />
+      <Drawer.Screen name="Ana Sayfa" component={HomeScreenStack} />
+      <Drawer.Screen name="Sepetim" component={CartScreenStack} />
+      <Drawer.Screen name="Iletisim" component={ContactScreenStack} />
+      <Drawer.Screen name="Login" component={LoginScreenStack} />
     </Drawer.Navigator>
   );
 }
