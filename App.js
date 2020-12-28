@@ -12,6 +12,7 @@ import Contact from './screens/Contact.js';
 import Cart from './screens/Cart.js';
 import Home from './screens/Home.js';
 import Login from './screens/Login.js';
+import SignUp from './screens/SignUp.js';
 import CustomDrawerContent from './components/CustomDrawerContent.js';
 import NavigationDrawerOrder from './components/NavigationDrawerOrder.js';
 import NavigationDrawerStructure from './components/NavigationDrawerStructure.js';
@@ -45,16 +46,17 @@ function StackTemplate(navigation, screen) {
           },
         }}
       />
-
+      <Stack.Screen name="SignUp" component={SignUp} />
     </Stack.Navigator>
   );
 }
+
 
 class LoginScreenStack extends React.Component {
   render() {
     const { navigation } = this.props;
     return (
-      StackTemplate(navigation, Login)
+      StackTemplate(navigation, Login)      
     );
   }
 }
@@ -94,7 +96,7 @@ function MyDrawer() {
       drawerContentOptions={{
         activeTintColor: '#4bae32'
       }}
-      drawerContent={props => <CustomDrawerContent {...props} />}>
+      drawerContent={props => <CustomDrawerContent {...props}/> }>
       <Drawer.Screen name="Ana Sayfa" component={HomeScreenStack} />
       <Drawer.Screen name="Sepetim" component={CartScreenStack} />
       <Drawer.Screen name="Iletisim" component={ContactScreenStack} />

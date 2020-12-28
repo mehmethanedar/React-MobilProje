@@ -1,216 +1,82 @@
-import * as React from 'react';
-import { StyleSheet,TouchableOpacity, Button, Text, TextInput,Image, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TextInput, Dimensions, TouchableOpacity } from 'react-native';
+import * as firebase from 'firebase';
 
-const AuthContext = React.createContext();
+const { width, height } = Dimensions.get('window');
 
-function SplashScreen() {
-  return (
-    <View>
-      <Text>Loading...</Text>
-    </View>
-  );
-}
-
-function HomeScreen() {
-  const { signOut } = React.useContext(AuthContext);
-
-  return (
-    <View>
-      <Text>Signed in!</Text>
-      
-      <Button title="Sign out" onPress={signOut} />
-    </View>
-  );
-}
-
-function SignInScreen() {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const { signIn } = React.useContext(AuthContext);
-
-  return (
-    <View style={styles.container}>
-        <Image source={require('../images/logo.png')} style={{ height: 76, width: 200,marginBottom:100 }} />
-        <View style={styles.inputView}>
-            <TextInput
-                style={styles.inputText}
-                placeholder="Username"
-                placeholderTextColor="#fff"
-                value={username}
-                onChangeText={setUsername}
-            />
-            </View>
-            <View style={styles.inputView}>
-            <TextInput
-                style={styles.inputText}
-                placeholder="Password"
-                placeholderTextColor="#fff"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-            />
-            </View>
-            <TouchableOpacity>
-                <Text style={styles.forgot}>Forgot Password?</Text>
-            </TouchableOpacity>
-            
-            <TouchableOpacity style={styles.loginBtn} title="Sign in" onPress={() => signIn({ username, password })}>
-                <Text style={styles.loginText}>LOGIN</Text>
-            </TouchableOpacity>
-            
-            <TouchableOpacity style={styles.loginBtn}>
-                <Text style={styles.loginText}>SIGN UP</Text>
-            </TouchableOpacity>
-            
-    </View>
-  );
-}
-
-const Stack = createStackNavigator();
-
-export default function Login({ navigation }) {
-  const [state, dispatch] = React.useReducer(
-    (prevState, action) => {
-      switch (action.type) {
-        case 'RESTORE_TOKEN':
-          return {
-            ...prevState,
-            userToken: action.token,
-            isLoading: false,
-          };
-        case 'SIGN_IN':
-          return {
-            ...prevState,
-            isSignout: false,
-            userToken: action.token,
-          };
-        case 'SIGN_OUT':
-          return {
-            ...prevState,
-            isSignout: true,
-            userToken: null,
-          };
-      }
-    },
-    {
-      isLoading: true,
-      isSignout: false,
-      userToken: null,
-    }
-  );
-
-  React.useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
-    const bootstrapAsync = async () => {
-      let userToken;
-
-      try {
-        userToken = await AsyncStorage.getItem('userToken');
-      } catch (e) {
-        // Restoring token failed
-      }
-
-      // After restoring token, we may need to validate it in production apps
-
-      // This will switch to the App screen or Auth screen and this loading
-      // screen will be unmounted and thrown away.
-      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
+export default class Login extends React.Component {
+  
+  state = {
+    email: '',
+    password: '',
+    login: false,
+  }
+  
+  componentDidMount = () => {
+    var firebaseConfig = {
+      apiKey: "AIzaSyBeJdKl0e8CD3H1Bjd8I3Mni1imUnzl64w",
+      authDomain: "react-mobil-proje.firebaseapp.com",
+      databaseURL: "https://react-mobil-proje-default-rtdb.firebaseio.com",
+      projectId: "react-mobil-proje",
+      storageBucket: "react-mobil-proje.appspot.com",
+      messagingSenderId: "322720429076",
+      appId: "1:322720429076:web:eb80277b015ac1e0bc2301",
+      measurementId: "G-28M6GRBC08"
     };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
 
-    bootstrapAsync();
-  }, []);
+    
+  }
 
-  const authContext = React.useMemo(
-    () => ({
-      signIn: async data => {
-        // In a production app, we need to send some data (usually username, password) to server and get a token
-        // We will also need to handle errors if sign in failed
-        // After getting token, we need to persist the token using `AsyncStorage`
-        // In the example, we'll use a dummy token
+  girisyap = () => {   
+    const {navigation} = this.props; 
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
+    firebase.auth().onAuthStateChanged(auth => {
+      if (auth) {
+        navigation.goBack();
+      }
+      else {
+        console.log('Giriş Yapılmadı');
+      }
+    })
+  }
 
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
-      },
-      signOut: () => dispatch({ type: 'SIGN_OUT' }),
-      signUp: async data => {
-        // In a production app, we need to send user data to server and get a token
-        // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `AsyncStorage`
-        // In the example, we'll use a dummy token
+  render() {
+    const {navigation} = this.props;
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <TextInput
+          placeholder="E-mail Adresi"
+          style={{ marginTop: 10, width: width - 40, padding: 10, fontSize: 12, backgroundColor: 'white', borderRadius: 4 }}
+          underlineColorAndroid='transparent'
+          onChangeText={email => this.setState({ email: email })}
+          value={this.state.email}
+          keyboardType='email-address'
+          placeholderTextColor='gray'
+        />
 
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
-      },
-    }),
-    []
-  );
+        <TextInput
+          placeholder="Şifre"
+          style={{ marginTop: 10, width: width - 40, padding: 10, fontSize: 12, backgroundColor: 'white', borderRadius: 4 }}
+          underlineColorAndroid='transparent'
+          onChangeText={password => this.setState({ password: password })}
+          value={this.state.password}
+          secureTextEntry
+          placeholderTextColor='gray'
+        />
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <View style={{ alignItems: 'center', backgroundColor: '#FF655B', width: width - 40, padding: 15, borderRadius: 4, marginTop: 10 }}>
+            <Text style={{ color: '#fff', fontSize: 12 }}>Kayıt Ol</Text>
+          </View>
+        </TouchableOpacity>
 
-  return (
-    <AuthContext.Provider value={authContext}>
-        <Stack.Navigator>
-          {state.isLoading ? (
-            // We haven't finished checking for the token yet
-            <Stack.Screen name="Splash" component={SplashScreen} />
-          ) : state.userToken == null ? (
-            // No token found, user isn't signed in
-            <Stack.Screen
-              name="SignIn"
-              component={SignInScreen}
-              options={{
-                title: 'Sign in',
-            // When logging out, a pop animation feels intuitive
-                animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-              }}
-            />
-          ) : (
-            // User is signed in
-            <Stack.Screen name="Home" component={HomeScreen} />
-          )}
-        </Stack.Navigator>
-    </AuthContext.Provider>
-  );
+        <TouchableOpacity onPress={() => this.girisyap()}>
+          <View style={{ alignItems: 'center', backgroundColor: '#FF655B', width: width - 40, padding: 15, borderRadius: 4, marginTop: 10 }}>
+            <Text style={{ color: '#fff', fontSize: 12 }}>Giriş Yap</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#d6ebd1',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    inputView:{
-        width:"80%",
-        backgroundColor:"#465881",
-        borderRadius:25,
-        height:50,
-        marginBottom:20,
-        justifyContent:"center",
-        padding:20
-    },
-    inputText:{
-        height:50,
-        color:"white",
-        fontSize:20
-    },
-    forgot:{
-        color:"#000",
-        fontSize:15,
-        fontWeight:"bold"
-    },
-    loginText:{
-        color:"#fff",
-        fontSize:15,
-        fontWeight:"bold"
-    },
-    loginBtn:{
-        width:"80%",
-        backgroundColor:"#4bae32",
-        borderRadius:25,
-        height:50,
-        alignItems:"center",
-        justifyContent:"center",
-        marginTop:30,
-        marginBottom:-20
-    }
-});

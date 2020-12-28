@@ -87,7 +87,7 @@ export default class Contact extends React.Component {
 
                     </View>
 
-                    <Button onPress={() => navigation.goBack()} title="Ana Sayfa" />
+                    <Button onPress={() => navigation.navigate('Home')} title="Ana Sayfa" />
 
                 </View>
             </ScrollView>
