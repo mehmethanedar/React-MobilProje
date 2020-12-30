@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput, Dimensions, TouchableOpacity } from 'react-native';
 import { firebase } from '../firebase.js';
-
+import Layout from '../components/Layout.js';
 
 
 export default function Login({ navigation }) {
@@ -10,7 +10,7 @@ export default function Login({ navigation }) {
 
   const onFooterLinkPress = () => {
     navigation.navigate('SignUp')
-}
+  }
 
   const girisyap = () => {
     firebase
@@ -41,7 +41,7 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
-
+      <Layout param={navigation} />
       <TextInput
         style={styles.input}
         placeholder='E-posta'

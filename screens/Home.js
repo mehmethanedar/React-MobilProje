@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
- 
-export default class DovizKurlari extends Component {
+import Layout from '../components/Layout.js'
+export default class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,37 +20,42 @@ export default class DovizKurlari extends Component {
             await parseString(responseXml, function (err, result) {
                 self.setState({ Kur: result });
             });
- 
+
         } catch (error) {
             console.log('fetch', err)
         }
     }
     render() {
+        const { navigation } = this.props;
         return (
-            <View style={{ flexDirection: 'row', backgroundColor: '#fff', paddingVertical: 10 }}>
-                <View style={styles.DovizView}>
-                    <Text style={styles.DovizBaslik}>USD/TRY</Text>
-                    <Text style={styles.Doviz}>{this.state.Kur != null ? this.state.Kur.Tarih_Date.Currency.filter(x => x.$.Kod == "USD")[0].ForexBuying[0] : 'veri yok'}</Text>
+            <View style={{ flexDirection: 'column', backgroundColor: '#fff' }}>
+                <Layout param={navigation} />
+                <View style={{ flexDirection: 'row', height: 50 }}>
+                    <View style={styles.DovizView}>
+                        <Text style={styles.DovizBaslik}>USD/TRY</Text>
+                        <Text style={styles.Doviz}>{this.state.Kur != null ? this.state.Kur.Tarih_Date.Currency.filter(x => x.$.Kod == "USD")[0].ForexBuying[0] : 'veri yok'}</Text>
+                    </View>
+                    <View style={styles.DovizView}>
+                        <Text style={styles.DovizBaslik}>EURO/TRY</Text>
+                        <Text style={styles.Doviz}>{this.state.Kur != null ? this.state.Kur.Tarih_Date.Currency.filter(x => x.$.Kod == "EUR")[0].ForexBuying[0] : 'veri yok'}</Text>
+                    </View>
+                    <View style={styles.DovizView}>
+                        <Text style={styles.DovizBaslik}>STERLİN/TRY</Text>
+                        <Text style={styles.Doviz}>{this.state.Kur != null ? this.state.Kur.Tarih_Date.Currency.filter(x => x.$.Kod == "GBP")[0].ForexBuying[0] : 'veri yok'}</Text>
+                    </View>
+                    <View style={[styles.DovizView, { borderRightWidth: 0 }]}>
+                        <Text style={styles.DovizBaslik}>RİYAL/TRY</Text>
+                        <Text style={styles.Doviz}>{this.state.Kur != null ? this.state.Kur.Tarih_Date.Currency.filter(x => x.$.Kod == "SAR")[0].ForexBuying[0] : 'veri yok'}</Text>
+                    </View>
                 </View>
-                <View style={styles.DovizView}>
-                    <Text style={styles.DovizBaslik}>EURO/TRY</Text>
-                    <Text style={styles.Doviz}>{this.state.Kur != null ? this.state.Kur.Tarih_Date.Currency.filter(x => x.$.Kod == "EUR")[0].ForexBuying[0] : 'veri yok'}</Text>
-                </View>
-                <View style={styles.DovizView}>
-                    <Text style={styles.DovizBaslik}>STERLİN/TRY</Text>
-                    <Text style={styles.Doviz}>{this.state.Kur != null ? this.state.Kur.Tarih_Date.Currency.filter(x => x.$.Kod == "GBP")[0].ForexBuying[0] : 'veri yok'}</Text>
-                </View>
-                <View style={[styles.DovizView, { borderRightWidth: 0 }]}>
-                    <Text style={styles.DovizBaslik}>RİYAL/TRY</Text>
-                    <Text style={styles.Doviz}>{this.state.Kur != null ? this.state.Kur.Tarih_Date.Currency.filter(x => x.$.Kod == "SAR")[0].ForexBuying[0] : 'veri yok'}</Text>
-                </View>
+
             </View>
         )
     }
 }
 const styles = StyleSheet.create({
     DovizView: {
-        flex: 1, borderRightWidth: 1, borderColor: 'grey'
+        flex: 1, borderRightWidth: 1, borderColor: 'grey', justifyContent: 'center'
     },
     DovizBaslik: {
         fontSize: 10, textAlign: 'center'

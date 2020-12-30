@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { View,StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 
 export default function NavigationDrawerOrder(props) {
 
     return (
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: 'row',}}>
             <TouchableOpacity onPress={() => props.navigationProps.navigate('Sepetim')}>
                 {/*Donute Button Image */}
-                <Image
+                <Image 
                     source={require('../images/sepet.png')}
                     style={{
                         width: 45,

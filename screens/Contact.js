@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text, Button, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import FontAwesome5, { FA5Style } from 'react-native-vector-icons/FontAwesome5';
+import Layout from '../components/Layout.js';
 
 export default class Contact extends React.Component {
 
@@ -10,7 +11,7 @@ export default class Contact extends React.Component {
         return (
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.container}>
-
+                <Layout param={navigation} />
                     <View style={styles.row}>
                         <Image source={require('../images/logo.png')} style={{ height: 76, width: 200, marginTop: 100, marginBottom: 30 }} />
                     </View>
