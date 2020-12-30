@@ -24,7 +24,7 @@ function StackTemplate(navigation, screen) {
     <Stack.Navigator initialRouteName="FirstPage">
       <Stack.Screen
         name="FirstPage"
-        component={screen}
+        component={screen}        
         options={{
           title: 'Triliya', //Set Header Title
 

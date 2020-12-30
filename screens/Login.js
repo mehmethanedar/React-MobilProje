@@ -1,82 +1,131 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput, Dimensions, TouchableOpacity } from 'react-native';
-import * as firebase from 'firebase';
+import { firebase } from '../firebase.js';
 
-const { width, height } = Dimensions.get('window');
 
-export default class Login extends React.Component {
-  
-  state = {
-    email: '',
-    password: '',
-    login: false,
-  }
-  
-  componentDidMount = () => {
-    var firebaseConfig = {
-      apiKey: "AIzaSyBeJdKl0e8CD3H1Bjd8I3Mni1imUnzl64w",
-      authDomain: "react-mobil-proje.firebaseapp.com",
-      databaseURL: "https://react-mobil-proje-default-rtdb.firebaseio.com",
-      projectId: "react-mobil-proje",
-      storageBucket: "react-mobil-proje.appspot.com",
-      messagingSenderId: "322720429076",
-      appId: "1:322720429076:web:eb80277b015ac1e0bc2301",
-      measurementId: "G-28M6GRBC08"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
 
-    
-  }
+export default function Login({ navigation }) {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  girisyap = () => {   
-    const {navigation} = this.props; 
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
-    firebase.auth().onAuthStateChanged(auth => {
-      if (auth) {
-        navigation.goBack();
-      }
-      else {
-        console.log('Giriş Yapılmadı');
-      }
-    })
-  }
-
-  render() {
-    const {navigation} = this.props;
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <TextInput
-          placeholder="E-mail Adresi"
-          style={{ marginTop: 10, width: width - 40, padding: 10, fontSize: 12, backgroundColor: 'white', borderRadius: 4 }}
-          underlineColorAndroid='transparent'
-          onChangeText={email => this.setState({ email: email })}
-          value={this.state.email}
-          keyboardType='email-address'
-          placeholderTextColor='gray'
-        />
-
-        <TextInput
-          placeholder="Şifre"
-          style={{ marginTop: 10, width: width - 40, padding: 10, fontSize: 12, backgroundColor: 'white', borderRadius: 4 }}
-          underlineColorAndroid='transparent'
-          onChangeText={password => this.setState({ password: password })}
-          value={this.state.password}
-          secureTextEntry
-          placeholderTextColor='gray'
-        />
-        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-          <View style={{ alignItems: 'center', backgroundColor: '#FF655B', width: width - 40, padding: 15, borderRadius: 4, marginTop: 10 }}>
-            <Text style={{ color: '#fff', fontSize: 12 }}>Kayıt Ol</Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => this.girisyap()}>
-          <View style={{ alignItems: 'center', backgroundColor: '#FF655B', width: width - 40, padding: 15, borderRadius: 4, marginTop: 10 }}>
-            <Text style={{ color: '#fff', fontSize: 12 }}>Giriş Yap</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  const onFooterLinkPress = () => {
+    navigation.navigate('SignUp')
 }
+
+  const girisyap = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((response) => {
+        const uid = response.user.uid
+        const usersRef = firebase.firestore().collection('users')
+        usersRef
+          .doc(uid)
+          .get()
+          .then(firestoreDocument => {
+            if (!firestoreDocument.exists) {
+              alert("User does not exist anymore.")
+              return;
+            }
+            const user = firestoreDocument.data()
+            navigation.navigate('Home')
+          })
+          .catch(error => {
+            alert(error)
+          });
+      })
+      .catch(error => {
+        alert(error)
+      })
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <TextInput
+        style={styles.input}
+        placeholder='E-posta'
+        placeholderTextColor="#aaaaaa"
+        onChangeText={(text) => setEmail(text)}
+        value={email}
+        underlineColorAndroid="transparent"
+        autoCapitalize="none"
+      />
+      <TextInput
+        style={styles.input}
+        placeholderTextColor="#aaaaaa"
+        secureTextEntry
+        placeholder='Şifre'
+        onChangeText={(text) => setPassword(text)}
+        value={password}
+        underlineColorAndroid="transparent"
+        autoCapitalize="none"
+      />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => girisyap()}>
+        <Text style={styles.buttonTitle}>Giriş Yap</Text>
+      </TouchableOpacity>
+      <View style={styles.footerView}>
+        <Text style={styles.footerText}>Hesabınız yok mu? Hemen <Text onPress={onFooterLinkPress} style={styles.footerLink}>Üye olun</Text></Text>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  title: {
+
+  },
+  logo: {
+    flex: 1,
+    height: 120,
+    width: 90,
+    alignSelf: "center",
+    margin: 30
+  },
+  input: {
+    height: 48,
+    borderRadius: 5,
+    overflow: 'hidden',
+    backgroundColor: 'white',
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 30,
+    marginRight: 30,
+    paddingLeft: 16
+  },
+  button: {
+    backgroundColor: '#788eec',
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 20,
+    height: 48,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: 'center'
+  },
+  buttonTitle: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: "bold"
+  },
+  footerView: {
+    flex: 1,
+    alignItems: "center",
+    marginTop: 20
+  },
+  footerText: {
+    fontSize: 16,
+    color: '#2e2e2d'
+  },
+  footerLink: {
+    color: "#788eec",
+    fontWeight: "bold",
+    fontSize: 16
+  }
+})
