@@ -8,35 +8,50 @@ import {
     DrawerItemList,
     DrawerItem,
 } from '@react-navigation/drawer';
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 
 
 export default function CustomDrawerContent(props) {
     let user;
-    const girisyap = () => {
+    const [fullName, setFullName] = useState('')
+    
+    if (firebase.auth().currentUser) {
         const usersRef = firebase.firestore().collection('users')
         usersRef
           .doc(firebase.auth().currentUser.uid)
           .get()
+          
           .then(firestoreDocument => {
             if (!firestoreDocument.exists) {
               alert("User does not exist anymore.")
               return;
             }
-            user = firestoreDocument.data()
-            console.log(user.fullName)
+            user=firestoreDocument.data()
+            setFullName(user.fullName)
           })
           .catch(error => {
             alert(error)
           });
     }
-
+        
+          
     return (
         
         <DrawerContentScrollView {...props}>
             <View style={{ paddingLeft: 20, paddingTop: 30, height: 180, backgroundColor: '#fff' }}>
                 <Image source={require('../images/logo.png')} style={{ height: 76, width: 200 }} />
-                <Text style={styles.isim}>Mehmet HANEDAR</Text>
-                <TouchableOpacity onPress={() => girisyap()}><Text>asdasd</Text></TouchableOpacity>
+
+                {firebase.auth().currentUser ? (
+                    <Text style={styles.isim}>{fullName}</Text>
+                ) : (
+                    <Text></Text>
+                )}
+                
+                {firebase.auth().currentUser ? (
+                    <Text>{firebase.auth().currentUser.email}</Text>
+                ) : (
+                    <Text></Text>
+                )}
 
             </View>
             <View style={{ height: 1, width: '100%', backgroundColor: 'black', opacity: .2 }} />
