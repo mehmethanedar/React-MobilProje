@@ -4,8 +4,6 @@ import FontAwesome5, { FA5Style } from 'react-native-vector-icons/FontAwesome5';
 import Layout from '../components/Layout.js';
 
 export default class Contact extends React.Component {
-
-
     render() {
         const { navigation } = this.props;
         return (
@@ -88,7 +86,7 @@ export default class Contact extends React.Component {
 
                     </View>
 
-                    <Button onPress={() => navigation.navigate('Home')} title="Ana Sayfa" />
+                    <Button onPress={() => navigation.navigate('Ana Sayfa')} title="Ana Sayfa" />
 
                 </View>
             </ScrollView>

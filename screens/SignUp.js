@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { StyleSheet , Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { firebase } from '../firebase.js';
 
-export default function RegistrationScreen({navigation}) {
+export default function RegistrationScreen({ navigation }) {
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -13,141 +13,149 @@ export default function RegistrationScreen({navigation}) {
     }
 
     const onRegisterPress = () => {
-      if (password !== confirmPassword) {
-        alert("Passwords don't match.")
-        return
-    }
-    firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then((response) => {
-            const uid = response.user.uid
-            const data = {
-                id: uid,
-                email,
-                fullName,
-            };
-            const usersRef = firebase.firestore().collection('users')
-            usersRef
-                .doc(uid)
-                .set(data)
-                .then(() => {
-                    navigation.navigate('Home', {user: data})
-                })
-                .catch((error) => {
-                    alert(error)
-                });
-        })
-        .catch((error) => {
-            alert(error)
-    });
+        if (password !== confirmPassword) {
+            alert("Şifreler Uyuşmuyor")
+            return
+        }
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then((response) => {
+                const uid = response.user.uid
+                const data = {
+                    id: uid,
+                    email,
+                    fullName,
+                };
+                const usersRef = firebase.firestore().collection('users')
+                usersRef
+                    .doc(uid)
+                    .set(data)
+                    .then(() => {
+                        navigation.navigate('Ana Sayfa', { user: data })
+                    })
+                    .catch((error) => {
+                        alert(error)
+                    });
+            })
+            .catch((error) => {
+                alert(error)
+            });
     }
 
     return (
         <View style={styles.container}>
+            <View>
+
+            </View>
+            <View>
             <TextInput
-                    style={styles.input}
-                    placeholder='Kullanıcı Adı'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setFullName(text)}
-                    value={fullName}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder='E-posta'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder='Şifre'
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder='Şifreyi Doğrula'
-                    onChangeText={(text) => setConfirmPassword(text)}
-                    value={confirmPassword}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => onRegisterPress()}>
-                    <Text style={styles.buttonTitle}>Create account</Text>
-                </TouchableOpacity>
-                <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
-                </View>
+                style={styles.input}
+                placeholder='Kullanıcı Adı'
+                placeholderTextColor="#aaaaaa"
+                onChangeText={(text) => setFullName(text)}
+                value={fullName}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='E-posta'
+                placeholderTextColor="#aaaaaa"
+                onChangeText={(text) => setEmail(text)}
+                value={email}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+            <TextInput
+                style={styles.input}
+                placeholderTextColor="#aaaaaa"
+                secureTextEntry
+                placeholder='Şifre'
+                onChangeText={(text) => setPassword(text)}
+                value={password}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+            <TextInput
+                style={styles.input}
+                placeholderTextColor="#aaaaaa"
+                secureTextEntry
+                placeholder='Şifreyi Doğrula'
+                onChangeText={(text) => setConfirmPassword(text)}
+                value={confirmPassword}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => onRegisterPress()}>
+                <Text style={styles.buttonTitle}>Hesap Oluştur</Text>
+            </TouchableOpacity>
+            <View style={styles.footerView}>
+                <Text style={styles.footerText}>Zaten hesabınız var mı? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Giriş Yap</Text></Text>
+            </View>
+            </View>
+            <View>
+
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-  container: {
-      flex: 1,
-      alignItems: 'center'
-  },
-  title: {
+    container: {
+        flex: 1,
+        justifyContent: 'space-between'
+    },
+    title: {
 
-  },
-  logo: {
-      flex: 1,
-      height: 120,
-      width: 90,
-      alignSelf: "center",
-      margin: 30
-  },
-  input: {
-      height: 48,
-      borderRadius: 5,
-      overflow: 'hidden',
-      backgroundColor: 'white',
-      marginTop: 10,
-      marginBottom: 10,
-      marginLeft: 30,
-      marginRight: 30,
-      paddingLeft: 16
-  },
-  button: {
-      backgroundColor: '#788eec',
-      marginLeft: 30,
-      marginRight: 30,
-      marginTop: 20,
-      height: 48,
-      borderRadius: 5,
-      alignItems: "center",
-      justifyContent: 'center'
-  },
-  buttonTitle: {
-      color: 'white',
-      fontSize: 16,
-      fontWeight: "bold"
-  },
-  footerView: {
-      flex: 1,
-      alignItems: "center",
-      marginTop: 20
-  },
-  footerText: {
-      fontSize: 16,
-      color: '#2e2e2d'
-  },
-  footerLink: {
-      color: "#788eec",
-      fontWeight: "bold",
-      fontSize: 16
-  }
+    },
+    logo: {
+        flex: 1,
+        height: 120,
+        width: 90,
+        alignSelf: "center",
+        margin: 30
+    },
+    input: {
+        height: 48,
+        borderRadius: 5,
+        overflow: 'hidden',
+        backgroundColor: 'white',
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 30,
+        marginRight: 30,
+        paddingLeft: 16
+    },
+    button: {
+        backgroundColor: '#788eec',
+        marginLeft: 30,
+        marginRight: 30,
+        marginTop: 20,
+        height: 48,
+        borderRadius: 5,
+        alignItems: "center",
+        justifyContent: 'center'
+    },
+    buttonTitle: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: "bold"
+    },
+    footerView: {
+        flex: 1,
+        alignItems: "center",
+        marginTop: 20
+    },
+    footerText: {
+        fontSize: 16,
+        color: '#2e2e2d'
+    },
+    footerLink: {
+        color: "#788eec",
+        fontWeight: "bold",
+        fontSize: 16
+    }
 })

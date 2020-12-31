@@ -1,1 +1,10 @@
-{}
+{
+  "webpackServerPort": null,
+  "expoServerPort": null,
+  "expoServerNgrokUrl": "https://49-nwh.anonymous.react-mobilproje.exp.direct",
+  "packagerNgrokUrl": "https://packager.49-nwh.anonymous.react-mobilproje.exp.direct",
+  "ngrokPid": 17060,
+  "packagerPort": null,
+  "packagerPid": null,
+  "devToolsPort": 19002
+}

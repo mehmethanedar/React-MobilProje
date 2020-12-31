@@ -28,7 +28,7 @@ export default function Login({ navigation }) {
               return;
             }
             const user = firestoreDocument.data()
-            navigation.navigate('Home')
+            navigation.navigate('Ana Sayfa', { user })
           })
           .catch(error => {
             alert(error)
@@ -41,33 +41,40 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Layout param={navigation} />
-      <TextInput
-        style={styles.input}
-        placeholder='E-posta'
-        placeholderTextColor="#aaaaaa"
-        onChangeText={(text) => setEmail(text)}
-        value={email}
-        underlineColorAndroid="transparent"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholderTextColor="#aaaaaa"
-        secureTextEntry
-        placeholder='Şifre'
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-        underlineColorAndroid="transparent"
-        autoCapitalize="none"
-      />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => girisyap()}>
-        <Text style={styles.buttonTitle}>Giriş Yap</Text>
-      </TouchableOpacity>
-      <View style={styles.footerView}>
-        <Text style={styles.footerText}>Hesabınız yok mu? Hemen <Text onPress={onFooterLinkPress} style={styles.footerLink}>Üye olun</Text></Text>
+      <View>
+        <Layout param={navigation} />
+      </View>
+      <View>
+        <TextInput
+          style={styles.input}
+          placeholder='E-posta'
+          placeholderTextColor="#aaaaaa"
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholderTextColor="#aaaaaa"
+          secureTextEntry
+          placeholder='Şifre'
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => girisyap()}>
+          <Text style={styles.buttonTitle}>Giriş Yap</Text>
+        </TouchableOpacity>
+        <View style={styles.footerView}>
+          <Text style={styles.footerText}>Hesabınız yok mu? Hemen <Text onPress={onFooterLinkPress} style={styles.footerLink}>Üye olun</Text></Text>
+        </View>
+      </View>
+      <View>
+
       </View>
     </View>
   );
@@ -76,7 +83,8 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center'
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
   title: {
 
@@ -97,7 +105,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 30,
     marginRight: 30,
-    paddingLeft: 16
+    paddingLeft: 16,
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   button: {
     backgroundColor: '#788eec',

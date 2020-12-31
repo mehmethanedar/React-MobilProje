@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text} from 'react-native';
 import Layout from '../components/Layout.js';
 
 export default class Cart extends React.Component {
