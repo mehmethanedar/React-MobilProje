@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Contact from '../screens/Contact.js';
 import Cart from '../screens/Cart.js';
-import Home from '../screens/Home.js';
+import AddProduct from '../screens/AddProduct.js';
 import LogOut from '../screens/LogOut.js'
-import {MyStack, ProductsStack,HomeStack} from './StackNavigator.js';
+import { MyStack, ProductsStack, HomeStack } from './StackNavigator.js';
 import CustomDrawerContent from '../components/CustomDrawerContent.js';
 import { firebase } from '../firebase.js'
 
@@ -16,6 +16,27 @@ const Drawer = createDrawerNavigator();
 export default function MyDrawer() {
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState();
+
+    const [userID, setUserID] = useState();
+    let user1;
+    if (firebase.auth().currentUser) {
+        const usersRef = firebase.firestore().collection('users')
+        usersRef
+            .doc(firebase.auth().currentUser.uid)
+            .get()
+            .then(firestoreDocument => {
+                if (!firestoreDocument.exists) {
+                    alert("User does not exist anymore.")
+                    return;
+                }
+                const user1 = firestoreDocument.data()
+                setUserID(user1.id)
+            })
+            .catch(error => {
+                alert(error)
+            });
+
+    }
 
     // Handle user state changes
     function onAuthStateChanged(user) {
@@ -39,8 +60,12 @@ export default function MyDrawer() {
             <Drawer.Screen name="Ana Sayfa" component={HomeStack} />
             <Drawer.Screen name="Sepetim" component={Cart} />
             <Drawer.Screen name="İletişim" component={Contact} />
-            {false ? (<Drawer.Screen name="Ürün" component={Product} />):(<Drawer.Screen name="Ürünler" component={ProductsStack} />)}
-            
+            {userID == "admin" && firebase.auth().currentUser
+                ? (<Drawer.Screen name="Urun Ekle" component={AddProduct} />)
+                : (<Drawer.Screen name="Ürünler" component={ProductsStack} />)
+            }
+
+
             {!user ? (
                 <Drawer.Screen name="Giriş Yap" component={MyStack} />
             ) : (

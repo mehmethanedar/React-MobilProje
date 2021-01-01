@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { firebase } from '../firebase.js';
 
-export default function RegistrationScreen({ navigation }) {
+export default function SignUp({ navigation }) {
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
