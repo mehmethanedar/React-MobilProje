@@ -3,6 +3,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Login from "../screens/Login";
 import SignUp from "../screens/SignUp";
+import Product from "../screens/Product";
+import Products from "../screens/Products";
+import Home from '../screens/Home';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +21,31 @@ const MyStack = () => {
     </Stack.Navigator>
   );
 }
+const ProductsStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen options={{ headerShown: false }} name="Ürünler" component={Products} />
+      <Stack.Screen options={{
+          headerStyle: {
+            backgroundColor: '#4bae32',
+          },         
+          headerTintColor: '#fff'}} name="Product" component={Product} />
+    </Stack.Navigator>
+  );
+}
+
+const HomeStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen options={{ headerShown: false }} name="Ana Sayfa" component={Home} />
+      <Stack.Screen options={{
+          headerStyle: {
+            backgroundColor: '#4bae32',
+          },
+          headerTintColor: '#fff'}} name="Product" component={Product} />
+    </Stack.Navigator>
+  );
+}
 
 
-export {MyStack};
+export {MyStack,ProductsStack,HomeStack};

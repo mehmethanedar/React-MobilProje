@@ -5,9 +5,7 @@ import Contact from '../screens/Contact.js';
 import Cart from '../screens/Cart.js';
 import Home from '../screens/Home.js';
 import LogOut from '../screens/LogOut.js'
-import Product from '../screens/Product.js';
-import Products from '../screens/Products.js';
-import {MyStack, ProductStack} from './StackNavigator.js';
+import {MyStack, ProductsStack,HomeStack} from './StackNavigator.js';
 import CustomDrawerContent from '../components/CustomDrawerContent.js';
 import { firebase } from '../firebase.js'
 
@@ -38,10 +36,10 @@ export default function MyDrawer() {
                 activeTintColor: '#4bae32',
             }}
             drawerContent={props => <CustomDrawerContent {...props} />}>
-            <Drawer.Screen name="Ana Sayfa" component={Home} />
+            <Drawer.Screen name="Ana Sayfa" component={HomeStack} />
             <Drawer.Screen name="Sepetim" component={Cart} />
             <Drawer.Screen name="İletişim" component={Contact} />
-            {false ? (<Drawer.Screen name="Ürün" component={Product} />):(<Drawer.Screen name="Ürünler" component={Products} />)}
+            {false ? (<Drawer.Screen name="Ürün" component={Product} />):(<Drawer.Screen name="Ürünler" component={ProductsStack} />)}
             
             {!user ? (
                 <Drawer.Screen name="Giriş Yap" component={MyStack} />

@@ -5,7 +5,7 @@ export default function Card(props) {
     return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(0,0,0,0.1)", height: 250, margin: 20, width: '100%' }}>
             <View style={{ flex: 5, width: '100%' }}>
-            <TouchableOpacity onPress={() => props.param.navigate('Ürünler')} style={{width:'100%'}}><Text>asdasd</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => props.param.navigate('Product')} style={{width:'100%'}}><Text>asdasd</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => props.param.navigate('Urun')} style={{width:'100%'}}>
                     <Image
                         source={require('../images/urun1.jpg')}
