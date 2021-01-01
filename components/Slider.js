@@ -15,7 +15,7 @@ export default class Slider extends React.Component {
                     prevPos: 'left',
                     nextPos: 'right',
                     nextTitle: '>',
-                    nextTitleStyle: { color: 'red', fontSize: 24, fontWeight: '500' },
+                    nextTitleStyle: { color: 'white', fontSize: 24, fontWeight: '500' },
                     PrevComponent: ({ onPress }) => (
                         <TouchableOpacity onPress={onPress}>
                             <Text style={{ color: 'white', fontSize: 24, fontWeight: '500' }}>

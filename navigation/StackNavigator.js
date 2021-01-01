@@ -6,7 +6,7 @@ import SignUp from "../screens/SignUp";
 
 const Stack = createStackNavigator();
 
-export default function MyStack() {
+const MyStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
@@ -18,3 +18,6 @@ export default function MyStack() {
     </Stack.Navigator>
   );
 }
+
+
+export {MyStack};

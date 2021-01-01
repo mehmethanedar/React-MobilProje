@@ -4,10 +4,13 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Contact from '../screens/Contact.js';
 import Cart from '../screens/Cart.js';
 import Home from '../screens/Home.js';
-import MyStack from './StackNavigator.js';
+import LogOut from '../screens/LogOut.js'
+import Product from '../screens/Product.js';
+import Products from '../screens/Products.js';
+import {MyStack, ProductStack} from './StackNavigator.js';
 import CustomDrawerContent from '../components/CustomDrawerContent.js';
 import { firebase } from '../firebase.js'
-import LogOut from '../screens/LogOut.js'
+
 
 const Drawer = createDrawerNavigator();
 
@@ -37,11 +40,13 @@ export default function MyDrawer() {
             drawerContent={props => <CustomDrawerContent {...props} />}>
             <Drawer.Screen name="Ana Sayfa" component={Home} />
             <Drawer.Screen name="Sepetim" component={Cart} />
-            <Drawer.Screen name="Iletisim" component={Contact} />
+            <Drawer.Screen name="İletişim" component={Contact} />
+            {false ? (<Drawer.Screen name="Ürün" component={Product} />):(<Drawer.Screen name="Ürünler" component={Products} />)}
+            
             {!user ? (
-                <Drawer.Screen name="Login" component={MyStack} />
+                <Drawer.Screen name="Giriş Yap" component={MyStack} />
             ) : (
-                    <Drawer.Screen name="LogOut" component={LogOut} />
+                    <Drawer.Screen name="Çıkış Yap" component={LogOut} />
                 )}
         </Drawer.Navigator>
     );
