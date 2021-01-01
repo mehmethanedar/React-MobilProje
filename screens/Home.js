@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native'
 import Layout from '../components/Layout.js'
+import Slider from '../components/Slider.js'
+import Swiper from "react-native-web-swiper";
+
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -28,8 +31,9 @@ export default class Home extends React.Component {
     render() {
         const { navigation } = this.props;
         return (
-            <View style={{ flexDirection: 'column', backgroundColor: '#fff' }}>
+            <View style={{ flex: 1 }}>
                 <Layout param={navigation} />
+
                 <View style={{ flexDirection: 'row', height: 50 }}>
                     <View style={styles.DovizView}>
                         <Text style={styles.DovizBaslik}>USD/TRY</Text>
@@ -48,8 +52,70 @@ export default class Home extends React.Component {
                         <Text style={styles.Doviz}>{this.state.Kur != null ? this.state.Kur.Tarih_Date.Currency.filter(x => x.$.Kod == "SAR")[0].ForexBuying[0] : 'veri yok'}</Text>
                     </View>
                 </View>
+                <ScrollView>
+                    <View style={{ height: 250 }}>
+                        <Slider />
 
+                    </View>
+                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(200,20,20,0.3)", height: 400, margin: 20, width: '100%' }}>
+                            <View style={{ flex: 2, width: '100%' }}>
+                                <Image
+                                    source={require('../images/urun1.jpg')}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                    }}
+                                />
+                            </View>
+                            <View style={{ flex: 1, alignItems: "center",width: '100%' }}>
+                                <View style={{ flex: 2, justifyContent: 'center' }}>
+                                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>76 ₺</Text>
+                                </View>
+                                <View style={{ flex: 1, justifyContent: 'center' }}>
+                                    <Text style={{ fontSize: 15, fontWeight: 'bold' }}>ERKEK 4'LÜ TAKIM </Text>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: "center",width: '100%' }}>
+
+                                    <View style={{marginLeft:8}}>
+                                        <Text style={{ fontSize: 15 }}>4-8 YAŞ</Text>
+                                    </View>
+                                    <View>
+                                        <Image
+                                            source={require('../images/sepetAdd.png')}
+                                            style={{
+                                                width: 35,
+                                                height: 35,
+                                                margin: 8
+                                            }}
+                                        />
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(200,20,20,0.3)", height: 400, margin: 20 }}>
+                            <Text>asfasf</Text>
+                        </View>
+                    </View>
+                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(200,20,20,0.3)", height: 400, margin: 20 }}>
+                            <Text>asfasf</Text>
+                        </View>
+                        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(200,20,20,0.3)", height: 400, margin: 20 }}>
+                            <Text>asfasf</Text>
+                        </View>
+                    </View>
+                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(200,20,20,0.3)", height: 400, margin: 20 }}>
+                            <Text>asfasf</Text>
+                        </View>
+                        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(200,20,20,0.3)", height: 400, margin: 20 }}>
+                            <Text>asfasf</Text>
+                        </View>
+                    </View>
+                </ScrollView>
             </View>
+
         )
     }
 }
