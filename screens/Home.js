@@ -59,7 +59,7 @@ export default class Home extends React.Component {
                     </View>
 
                     <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                    <Card param={navigation} />
+                        <Card param={navigation} />
                     </View>
                 </ScrollView>
 

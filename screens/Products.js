@@ -11,19 +11,6 @@ export default function Products({ navigation }) {
             <ScrollView>
                 <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                     <Card param={navigation} />
-                    <Card />
-                </View>
-                <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                    <Card />
-                    <Card />
-                </View>
-                <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                    <Card />
-                    <Card />
-                </View>
-                <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                    <Card />
-                    <Card />
                 </View>
             </ScrollView>
         </View>
