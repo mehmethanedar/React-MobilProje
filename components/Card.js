@@ -3,29 +3,33 @@ import { useState, useEffect } from 'react';
 import { firebase } from '../firebase.js';
 import { View, Text, Image, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import { firestore } from 'firebase';
+import Data from '../screens/Product.js'
 
 
 export default function Card(props) {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([])
+  let a = 0
+  if (a == 0) {
+    useEffect(() => {
+      const usersRef = firebase.firestore().collection('products')
+      usersRef
+        .get()
+        .then(querySnapshot => {
+          console.log('Total users: ', querySnapshot.size);
 
-  useEffect(() => {
-    const usersRef = firebase.firestore().collection('products')
-    usersRef
-      .get()
-      .then(querySnapshot => {
-        console.log('Total users: ', querySnapshot.size);
+          querySnapshot.forEach(documentSnapshot => {
+            products.push(documentSnapshot.data())
+          });
+          setLoading(false);
 
-        querySnapshot.forEach(documentSnapshot => {
-          products.push(documentSnapshot.data())
         });
-        setLoading(false);
-
-      });
-    return () => {
-      firestore()
-    }
-  }, [])
+      return () => {
+        firestore()
+      }
+    }, [])
+    a++
+  }
 
 
   console.log(products)
@@ -44,24 +48,24 @@ export default function Card(props) {
         renderItem={({ item }) => (
           <View style={{
             flex: 1,
-            height: 300, backgroundColor: "rgba(236,236,236,0.1)", marginHorizontal: 15, marginVertical: 20, padding: 2, flex: 1, alignItems: 'center', justifyContent: 'center',
-            width: '100%',
+            height: 300, backgroundColor: "rgba(236,236,236,0.1)", marginHorizontal: 15, marginVertical: 20, padding: 15, flex: 1, alignItems: 'center', justifyContent: 'center',
+            width: 60,
             shadowColor: "#000",
             shadowOffset: {
               width: 0,
-              height: 2,
+              height: 3,
             },
-            shadowOpacity: 2.30,
-            shadowRadius: 4.3,
-            elevation: 4,
+            shadowOpacity: 0.30,
+            shadowRadius: 4.65,
+            elevation: 8,
           }}>
-            <View style={{ flex: 1, width: '100%', height: 180 }}>
-              <TouchableOpacity onPress={() => props.param.navigate('Product')} style={{ width: '100%', height: 80, flex: 1 }}>
+            <View style={{ flex: 1, width: '100%', height: 180, marginTop: 15 }}>
+              <TouchableOpacity onPress={() => props.param.navigate('Product', { itemID: item.id, name: item.productName, price: item.productPrice, age: item.productAge })} style={{ width: '100%', height: 80, flex: 1 }}>
                 <Image
                   source={require('../images/urun1.jpg')}
                   style={{
-                    width: '100%',
-                    height: '100%',
+                    width: 180,
+                    height: 180,
 
                   }}
                 />
