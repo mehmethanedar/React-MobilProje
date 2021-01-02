@@ -3,15 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.ToggleButtonRow = exports.default = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
 var _reactNative = require("react-native");
 
-var _ToggleButton = _interopRequireDefault(require("./ToggleButton"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ToggleButtonElements = require("./ToggleButtonElements");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -53,14 +51,14 @@ const ToggleButtonRow = ({
   style
 }) => {
   const count = React.Children.count(children);
-  return /*#__PURE__*/React.createElement(_ToggleButton.default.Group, {
+  return /*#__PURE__*/React.createElement(_ToggleButtonElements.ToggleButton.Group, {
     value: value,
     onValueChange: onValueChange
   }, /*#__PURE__*/React.createElement(_reactNative.View, {
     style: [styles.row, style]
   }, React.Children.map(children, (child, i) => {
     // @ts-ignore
-    if (child && child.type === _ToggleButton.default) {
+    if (child && child.type === _ToggleButtonElements.ToggleButton) {
       // @ts-ignore
       return /*#__PURE__*/React.cloneElement(child, {
         style: [styles.button, i === 0 ? styles.first : i === count - 1 ? styles.last : styles.middle, // @ts-ignore
@@ -72,6 +70,7 @@ const ToggleButtonRow = ({
   })));
 };
 
+exports.ToggleButtonRow = ToggleButtonRow;
 ToggleButtonRow.displayName = 'ToggleButton.Row';
 
 const styles = _reactNative.StyleSheet.create({
@@ -96,6 +95,7 @@ const styles = _reactNative.StyleSheet.create({
   }
 });
 
-var _default = ToggleButtonRow;
+var _default = ToggleButtonRow; // @component-docs ignore-next-line
+
 exports.default = _default;
 //# sourceMappingURL=ToggleButtonRow.js.map

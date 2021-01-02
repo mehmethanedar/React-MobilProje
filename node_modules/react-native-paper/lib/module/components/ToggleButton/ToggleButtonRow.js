@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import ToggleButton from './ToggleButton';
+import { ToggleButton } from './ToggleButtonElements';
 
 /**
  * Toggle button row renders a group of toggle buttons in a row.
@@ -79,5 +79,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 0
   }
 });
-export default ToggleButtonRow;
+export default ToggleButtonRow; // @component-docs ignore-next-line
+
+export { ToggleButtonRow };
 //# sourceMappingURL=ToggleButtonRow.js.map

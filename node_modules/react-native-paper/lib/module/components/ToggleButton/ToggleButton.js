@@ -9,9 +9,9 @@ import { StyleSheet } from 'react-native';
 import { withTheme } from '../../core/theming';
 import color from 'color';
 import IconButton from '../IconButton';
-import ToggleButtonGroup, { ToggleButtonGroupContext } from './ToggleButtonGroup';
-import ToggleButtonRow from './ToggleButtonRow';
+import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { black, white } from '../../styles/colors';
+import { ToggleButtonRow, ToggleButtonGroup } from './ToggleButtonElements';
 
 /**
  * Toggle buttons can be used to group related options. To emphasize groups of related toggle buttons,
@@ -111,5 +111,9 @@ const styles = StyleSheet.create({
     margin: 0
   }
 });
-export default withTheme(ToggleButton);
+export default withTheme(ToggleButton); // @component-docs ignore-next-line
+
+const ToggleButtonWithTheme = withTheme(ToggleButton); // @component-docs ignore-next-line
+
+export { ToggleButtonWithTheme as ToggleButton };
 //# sourceMappingURL=ToggleButton.js.map

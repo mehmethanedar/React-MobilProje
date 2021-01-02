@@ -3,23 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.RadioButton = exports.default = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
 var _reactNative = require("react-native");
 
-var _RadioButtonGroup = _interopRequireDefault(require("./RadioButtonGroup"));
-
-var _RadioButtonAndroid = _interopRequireDefault(require("./RadioButtonAndroid"));
-
-var _RadioButtonIOS = _interopRequireDefault(require("./RadioButtonIOS"));
-
-var _RadioButtonItem = _interopRequireDefault(require("./RadioButtonItem"));
+var _RadioButtonElements = require("./RadioButtonElements");
 
 var _theming = require("../../core/theming");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -77,23 +69,27 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
  */
 const RadioButton = props => {
   const Button = _reactNative.Platform.select({
-    default: _RadioButtonAndroid.default,
-    ios: _RadioButtonIOS.default
+    default: _RadioButtonElements.RadioButtonAndroid,
+    ios: _RadioButtonElements.RadioButtonIOS
   });
 
   return /*#__PURE__*/React.createElement(Button, props);
 }; // @component ./RadioButtonGroup.tsx
 
 
-RadioButton.Group = _RadioButtonGroup.default; // @component ./RadioButtonAndroid.tsx
+RadioButton.Group = _RadioButtonElements.RadioButtonGroup; // @component ./RadioButtonAndroid.tsx
 
-RadioButton.Android = _RadioButtonAndroid.default; // @component ./RadioButtonIOS.tsx
+RadioButton.Android = _RadioButtonElements.RadioButtonAndroid; // @component ./RadioButtonIOS.tsx
 
-RadioButton.IOS = _RadioButtonIOS.default; // @component ./RadioButtonItem.tsx
+RadioButton.IOS = _RadioButtonElements.RadioButtonIOS; // @component ./RadioButtonItem.tsx
 
-RadioButton.Item = _RadioButtonItem.default;
+RadioButton.Item = _RadioButtonElements.RadioButtonItem;
 
-var _default = (0, _theming.withTheme)(RadioButton);
+var _default = (0, _theming.withTheme)(RadioButton); // @component-docs ignore-next-line
+
 
 exports.default = _default;
+const RadioButtonWithTheme = (0, _theming.withTheme)(RadioButton); // @component-docs ignore-next-line
+
+exports.RadioButton = RadioButtonWithTheme;
 //# sourceMappingURL=RadioButton.js.map

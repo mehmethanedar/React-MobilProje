@@ -107,7 +107,7 @@ const DataTablePagination = (_ref) => {
       direction: I18nManager.isRTL ? 'rtl' : 'ltr'
     }),
     color: theme.colors.text,
-    disabled: page === numberOfPages - 1,
+    disabled: numberOfPages === 0 || page === numberOfPages - 1,
     onPress: () => onPageChange(page + 1)
   }));
 };

@@ -67,5 +67,7 @@ const AppbarAction = (_ref) => {
 };
 
 AppbarAction.displayName = 'Appbar.Action';
-export default AppbarAction;
+export default AppbarAction; // @component-docs ignore-next-line
+
+export { AppbarAction };
 //# sourceMappingURL=AppbarAction.js.map

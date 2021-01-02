@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.AppbarBackIcon = exports.default = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
@@ -40,6 +40,8 @@ const AppbarBackIcon = ({
   direction: _reactNative.I18nManager.isRTL ? 'rtl' : 'ltr'
 });
 
+exports.AppbarBackIcon = AppbarBackIcon;
+
 const styles = _reactNative.StyleSheet.create({
   wrapper: {
     alignItems: 'center',
@@ -52,6 +54,7 @@ const styles = _reactNative.StyleSheet.create({
   }
 });
 
-var _default = AppbarBackIcon;
+var _default = AppbarBackIcon; // @component-docs ignore-next-line
+
 exports.default = _default;
 //# sourceMappingURL=AppbarBackIcon.js.map

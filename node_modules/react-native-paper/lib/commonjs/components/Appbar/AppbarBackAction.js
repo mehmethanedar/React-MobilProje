@@ -3,15 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.AppbarBackAction = exports.default = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
-var _AppbarAction = _interopRequireDefault(require("./AppbarAction"));
-
-var _AppbarBackIcon = _interopRequireDefault(require("./AppbarBackIcon"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _AppbarElements = require("./AppbarElements");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -61,14 +57,16 @@ const AppbarBackAction = (_ref) => {
   } = _ref,
       rest = _objectWithoutProperties(_ref, ["accessibilityLabel"]);
 
-  return /*#__PURE__*/React.createElement(_AppbarAction.default, _extends({
+  return /*#__PURE__*/React.createElement(_AppbarElements.AppbarAction, _extends({
     accessibilityLabel: accessibilityLabel
   }, rest, {
-    icon: _AppbarBackIcon.default
+    icon: _AppbarElements.AppbarBackIcon
   }));
 };
 
+exports.AppbarBackAction = AppbarBackAction;
 AppbarBackAction.displayName = 'Appbar.BackAction';
-var _default = AppbarBackAction;
+var _default = AppbarBackAction; // @component-docs ignore-next-line
+
 exports.default = _default;
 //# sourceMappingURL=AppbarBackAction.js.map

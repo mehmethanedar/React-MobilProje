@@ -15,8 +15,6 @@ var _TextInputAffix = _interopRequireWildcard(require("./TextInputAffix"));
 
 var _constants = require("../constants");
 
-var _reactNative = require("react-native");
-
 var _enums = require("./enums");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -74,6 +72,7 @@ function getAdornmentStyleAdjustmentForNativeInput({
   adornmentConfig,
   leftAffixWidth,
   rightAffixWidth,
+  paddingHorizontal,
   inputOffset = 0,
   mode
 }) {
@@ -82,14 +81,12 @@ function getAdornmentStyleAdjustmentForNativeInput({
       type,
       side
     }) => {
-      const isWeb = _reactNative.Platform.OS !== 'ios' && _reactNative.Platform.OS !== 'android';
       const isLeftSide = side === _enums.AdornmentSide.Left;
       const inputModeAdornemntOffset = mode === _enums.InputMode.Outlined ? _constants.ADORNMENT_OFFSET + _constants.OUTLINED_INPUT_OFFSET : _constants.ADORNMENT_OFFSET;
-      const offset = (isLeftSide ? leftAffixWidth : rightAffixWidth) + inputModeAdornemntOffset;
       const paddingKey = "padding".concat(captalize(side));
-      if (isWeb) return {
-        [paddingKey]: offset
-      };
+      const affixWidth = isLeftSide ? leftAffixWidth : rightAffixWidth;
+      const padding = typeof paddingHorizontal === 'number' ? paddingHorizontal : inputModeAdornemntOffset;
+      const offset = affixWidth + padding;
       const isAffix = type === _enums.AdornmentType.Affix;
       const marginKey = "margin".concat(captalize(side));
       return {
@@ -117,7 +114,8 @@ const TextInputAdornment = ({
   visible,
   topPosition,
   isTextInputFocused,
-  forceFocus
+  forceFocus,
+  paddingHorizontal
 }) => {
   if (adornmentConfig.length) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, adornmentConfig.map(({
@@ -136,7 +134,8 @@ const TextInputAdornment = ({
         key: side,
         side: side,
         testID: "".concat(side, "-").concat(type, "-adornment"),
-        isTextInputFocused
+        isTextInputFocused,
+        paddingHorizontal
       };
 
       if (type === _enums.AdornmentType.Icon) {

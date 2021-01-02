@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.ToggleButtonGroupContext = void 0;
+exports.ToggleButtonGroup = exports.default = exports.ToggleButtonGroupContext = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
@@ -14,7 +14,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 const ToggleButtonGroupContext = /*#__PURE__*/React.createContext(null);
 /**
  * Toggle group allows to control a group of toggle buttons.</br>
- * It doesn't change the appearance of the toggle buttons. If you want to group them in a row, check out <a href="react-native-paper/toggle-button-row.html">`ToggleButton.Row`</a>.
+ * It doesn't change the appearance of the toggle buttons. If you want to group them in a row, check out <a href="toggle-button-row.html">`ToggleButton.Row`</a>.
  *
  * <div class="screenshots">
  *   <figure>
@@ -57,7 +57,9 @@ const ToggleButtonGroup = ({
   }
 }, children);
 
+exports.ToggleButtonGroup = ToggleButtonGroup;
 ToggleButtonGroup.displayName = 'ToggleButton.Group';
-var _default = ToggleButtonGroup;
+var _default = ToggleButtonGroup; // @component-docs ignore-next-line
+
 exports.default = _default;
 //# sourceMappingURL=ToggleButtonGroup.js.map

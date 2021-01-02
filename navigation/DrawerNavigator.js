@@ -8,6 +8,7 @@ import CustomDrawerContent from '../components/CustomDrawerContent.js';
 import { firebase } from '../firebase.js'
 import Products from '../screens/Products.js';
 import CartTabNavigator from './TabNavigator.js';
+import Cart from '../screens/Cart.js';
 
 
 const Drawer = createDrawerNavigator();
@@ -58,7 +59,8 @@ export default function MyDrawer() {
             }}
             drawerContent={props => <CustomDrawerContent {...props} />}>
             <Drawer.Screen name="Ana Sayfa" component={HomeStack} />
-            <Drawer.Screen name="Sepetim" component={CartTabNavigator} />
+            <Drawer.Screen name="Sepetim" component={Cart} />
+            <Drawer.Screen name="İletişim" component={CartTabNavigator} />
             {userID == "admin" && firebase.auth().currentUser
                 ? (<Drawer.Screen name="Ürün Ekle" component={AddProduct} />)
                 : (<Drawer.Screen name="Ürünler" component={Products} />)

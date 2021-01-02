@@ -7,11 +7,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 import * as React from 'react';
 import { View, Platform, StyleSheet } from 'react-native';
 import color from 'color';
-import AppbarContent from './AppbarContent';
-import AppbarAction from './AppbarAction';
-import AppbarBackAction from './AppbarBackAction'; // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
-import AppbarHeader from './AppbarHeader';
+import { AppbarContent, AppbarAction, AppbarBackAction, AppbarHeader } from './AppbarElements';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
@@ -172,5 +168,9 @@ const styles = StyleSheet.create({
     width: 48
   }
 });
-export default withTheme(Appbar);
+export default withTheme(Appbar); // @component-docs ignore-next-line
+
+const AppbarWithTheme = withTheme(Appbar); // @component-docs ignore-next-line
+
+export { AppbarWithTheme as Appbar };
 //# sourceMappingURL=Appbar.js.map

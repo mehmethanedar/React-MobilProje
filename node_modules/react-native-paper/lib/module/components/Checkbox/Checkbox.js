@@ -1,9 +1,6 @@
 import * as React from 'react';
-import { Platform } from 'react-native'; // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
-import CheckboxIOS from './CheckboxIOS';
-import CheckboxAndroid from './CheckboxAndroid';
-import CheckboxItem from './CheckboxItem';
+import { Platform } from 'react-native';
+import { CheckboxIOS, CheckboxItem, CheckboxAndroid } from './CheckboxElements';
 import { withTheme } from '../../core/theming';
 
 /**
@@ -57,5 +54,9 @@ Checkbox.Item = CheckboxItem; // @component ./CheckboxAndroid.tsx
 Checkbox.Android = CheckboxAndroid; // @component ./CheckboxIOS.tsx
 
 Checkbox.IOS = CheckboxIOS;
-export default withTheme(Checkbox);
+export default withTheme(Checkbox); // @component-docs ignore-next-line
+
+const CheckboxWithTheme = withTheme(Checkbox); // @component-docs ignore-next-line
+
+export { CheckboxWithTheme as Checkbox };
 //# sourceMappingURL=Checkbox.js.map

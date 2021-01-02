@@ -36,5 +36,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain'
   }
 });
-export default AppbarBackIcon;
+export default AppbarBackIcon; // @component-docs ignore-next-line
+
+export { AppbarBackIcon };
 //# sourceMappingURL=AppbarBackIcon.js.map

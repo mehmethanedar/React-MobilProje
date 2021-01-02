@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.ToggleButton = exports.default = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
@@ -15,11 +15,11 @@ var _color = _interopRequireDefault(require("color"));
 
 var _IconButton = _interopRequireDefault(require("../IconButton"));
 
-var _ToggleButtonGroup = _interopRequireWildcard(require("./ToggleButtonGroup"));
-
-var _ToggleButtonRow = _interopRequireDefault(require("./ToggleButtonRow"));
+var _ToggleButtonGroup = require("./ToggleButtonGroup");
 
 var _colors = require("../../styles/colors");
+
+var _ToggleButtonElements = require("./ToggleButtonElements");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -121,9 +121,9 @@ const ToggleButton = (_ref) => {
 }; // @component ./ToggleButtonGroup.tsx
 
 
-ToggleButton.Group = _ToggleButtonGroup.default; // @component ./ToggleButtonRow.tsx
+ToggleButton.Group = _ToggleButtonElements.ToggleButtonGroup; // @component ./ToggleButtonRow.tsx
 
-ToggleButton.Row = _ToggleButtonRow.default;
+ToggleButton.Row = _ToggleButtonElements.ToggleButtonRow;
 
 const styles = _reactNative.StyleSheet.create({
   content: {
@@ -133,7 +133,11 @@ const styles = _reactNative.StyleSheet.create({
   }
 });
 
-var _default = (0, _theming.withTheme)(ToggleButton);
+var _default = (0, _theming.withTheme)(ToggleButton); // @component-docs ignore-next-line
+
 
 exports.default = _default;
+const ToggleButtonWithTheme = (0, _theming.withTheme)(ToggleButton); // @component-docs ignore-next-line
+
+exports.ToggleButton = ToggleButtonWithTheme;
 //# sourceMappingURL=ToggleButton.js.map

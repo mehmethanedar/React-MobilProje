@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.AppbarAction = exports.default = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
@@ -82,7 +82,9 @@ const AppbarAction = (_ref) => {
   }, rest));
 };
 
+exports.AppbarAction = AppbarAction;
 AppbarAction.displayName = 'Appbar.Action';
-var _default = AppbarAction;
+var _default = AppbarAction; // @component-docs ignore-next-line
+
 exports.default = _default;
 //# sourceMappingURL=AppbarAction.js.map

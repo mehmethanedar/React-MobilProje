@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.DEFAULT_APPBAR_HEIGHT = void 0;
+exports.Appbar = exports.default = exports.DEFAULT_APPBAR_HEIGHT = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
@@ -11,13 +11,7 @@ var _reactNative = require("react-native");
 
 var _color = _interopRequireDefault(require("color"));
 
-var _AppbarContent2 = _interopRequireDefault(require("./AppbarContent"));
-
-var _AppbarAction = _interopRequireDefault(require("./AppbarAction"));
-
-var _AppbarBackAction = _interopRequireDefault(require("./AppbarBackAction"));
-
-var _AppbarHeader2 = _interopRequireDefault(require("./AppbarHeader"));
+var _AppbarElements = require("./AppbarElements");
 
 var _Surface = _interopRequireDefault(require("../Surface"));
 
@@ -129,7 +123,7 @@ const Appbar = (_ref) => {
     let rightItemsCount = 0;
     React.Children.forEach(children, child => {
       if ( /*#__PURE__*/React.isValidElement(child)) {
-        if (child.type === _AppbarContent2.default) {
+        if (child.type === _AppbarElements.AppbarContent) {
           hasAppbarContent = true;
         } else if (hasAppbarContent) {
           rightItemsCount++;
@@ -153,7 +147,7 @@ const Appbar = (_ref) => {
   }, rest), shouldAddLeftSpacing ? /*#__PURE__*/React.createElement(_reactNative.View, {
     style: styles.spacing
   }) : null, React.Children.toArray(children).filter(child => child != null && typeof child !== 'boolean').map((child, i) => {
-    if (! /*#__PURE__*/React.isValidElement(child) || ![_AppbarContent2.default, _AppbarAction.default, _AppbarBackAction.default // @ts-ignore Type 'string' is not assignable to type
+    if (! /*#__PURE__*/React.isValidElement(child) || ![_AppbarElements.AppbarContent, _AppbarElements.AppbarAction, _AppbarElements.AppbarBackAction // @ts-ignore Type 'string' is not assignable to type
     ].includes(child.type)) {
       return child;
     }
@@ -162,7 +156,7 @@ const Appbar = (_ref) => {
       color: typeof child.props.color !== 'undefined' ? child.props.color : isDark ? _colors.white : _colors.black
     };
 
-    if (child.type === _AppbarContent2.default) {
+    if (child.type === _AppbarElements.AppbarContent) {
       props.style = [// Since content is not first item, add extra left margin
       i !== 0 && {
         marginLeft: 8
@@ -178,13 +172,13 @@ const Appbar = (_ref) => {
 }; // @component ./AppbarContent.tsx
 
 
-Appbar.Content = _AppbarContent2.default; // @component ./AppbarAction.tsx
+Appbar.Content = _AppbarElements.AppbarContent; // @component ./AppbarAction.tsx
 
-Appbar.Action = _AppbarAction.default; // @component ./AppbarBackAction.tsx
+Appbar.Action = _AppbarElements.AppbarAction; // @component ./AppbarBackAction.tsx
 
-Appbar.BackAction = _AppbarBackAction.default; // @component ./AppbarHeader.tsx
+Appbar.BackAction = _AppbarElements.AppbarBackAction; // @component ./AppbarHeader.tsx
 
-Appbar.Header = _AppbarHeader2.default;
+Appbar.Header = _AppbarElements.AppbarHeader;
 
 const styles = _reactNative.StyleSheet.create({
   appbar: {
@@ -199,7 +193,11 @@ const styles = _reactNative.StyleSheet.create({
   }
 });
 
-var _default = (0, _theming.withTheme)(Appbar);
+var _default = (0, _theming.withTheme)(Appbar); // @component-docs ignore-next-line
+
 
 exports.default = _default;
+const AppbarWithTheme = (0, _theming.withTheme)(Appbar); // @component-docs ignore-next-line
+
+exports.Appbar = AppbarWithTheme;
 //# sourceMappingURL=Appbar.js.map

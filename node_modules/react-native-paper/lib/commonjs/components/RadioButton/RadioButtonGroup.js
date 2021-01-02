@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.RadioButtonContext = void 0;
+exports.RadioButtonGroup = exports.default = exports.RadioButtonContext = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
@@ -71,7 +71,9 @@ const RadioButtonGroup = ({
   accessibilityRole: "radiogroup"
 }, children));
 
+exports.RadioButtonGroup = RadioButtonGroup;
 RadioButtonGroup.displayName = 'RadioButton.Group';
-var _default = RadioButtonGroup;
+var _default = RadioButtonGroup; // @component-docs ignore-next-line
+
 exports.default = _default;
 //# sourceMappingURL=RadioButtonGroup.js.map

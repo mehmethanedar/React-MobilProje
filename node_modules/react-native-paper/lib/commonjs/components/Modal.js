@@ -9,7 +9,7 @@ var React = _interopRequireWildcard(require("react"));
 
 var _reactNative = require("react-native");
 
-var _reactNativeSafeAreaView = _interopRequireDefault(require("react-native-safe-area-view"));
+var _reactNativeIphoneXHelper = require("react-native-iphone-x-helper");
 
 var _Surface = _interopRequireDefault(require("./Surface"));
 
@@ -28,6 +28,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 const DEFAULT_DURATION = 220;
+const TOP_INSET = (0, _reactNativeIphoneXHelper.getStatusBarHeight)(true);
+const BOTTOM_INSET = (0, _reactNativeIphoneXHelper.getBottomSpace)();
 /**
  * The Modal component is a simple way to present content above an enclosing view.
  * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
@@ -198,8 +200,11 @@ class Modal extends React.Component {
         backgroundColor: colors.backdrop,
         opacity
       }]
-    })), /*#__PURE__*/React.createElement(_reactNativeSafeAreaView.default, {
-      style: styles.wrapper,
+    })), /*#__PURE__*/React.createElement(_reactNative.View, {
+      style: [styles.wrapper, {
+        marginTop: TOP_INSET,
+        marginBottom: BOTTOM_INSET
+      }],
       pointerEvents: "box-none"
     }, /*#__PURE__*/React.createElement(_Surface.default, {
       style: [{

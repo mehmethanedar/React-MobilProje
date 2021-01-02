@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Contact from '../screens/Contact.js';
-import Cart from '../screens/Cart.js';
+import Map from '../screens/Map.js';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,8 +17,8 @@ const CartTabNavigator = () => {
                   }
             }}
         >
-            <Tab.Screen name="Sepetim" component={Cart} />
             <Tab.Screen name="İletişim" component={Contact} />
+            <Tab.Screen name="Harita" component={Map} />
         </Tab.Navigator>
     );
 };

@@ -5,8 +5,7 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 import * as React from 'react';
-import AppbarAction from './AppbarAction';
-import AppbarBackIcon from './AppbarBackIcon';
+import { AppbarAction, AppbarBackIcon } from './AppbarElements';
 
 /**
  * A component used to display a back button in the appbar.
@@ -54,5 +53,7 @@ const AppbarBackAction = (_ref) => {
 };
 
 AppbarBackAction.displayName = 'Appbar.BackAction';
-export default AppbarBackAction;
+export default AppbarBackAction; // @component-docs ignore-next-line
+
+export { AppbarBackAction };
 //# sourceMappingURL=AppbarBackAction.js.map

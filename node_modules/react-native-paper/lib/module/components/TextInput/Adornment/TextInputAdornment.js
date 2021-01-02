@@ -10,7 +10,6 @@ import React from 'react';
 import TextInputIcon, { IconAdornment } from './TextInputIcon';
 import TextInputAffix, { AffixAdornment } from './TextInputAffix';
 import { ADORNMENT_OFFSET, OUTLINED_INPUT_OFFSET } from '../constants';
-import { Platform } from 'react-native';
 import { AdornmentSide, AdornmentType, InputMode } from './enums';
 export function getAdornmentConfig({
   left,
@@ -52,6 +51,7 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   adornmentConfig,
   leftAffixWidth,
   rightAffixWidth,
+  paddingHorizontal,
   inputOffset = 0,
   mode
 }) {
@@ -60,14 +60,12 @@ export function getAdornmentStyleAdjustmentForNativeInput({
       type,
       side
     }) => {
-      const isWeb = Platform.OS !== 'ios' && Platform.OS !== 'android';
       const isLeftSide = side === AdornmentSide.Left;
       const inputModeAdornemntOffset = mode === InputMode.Outlined ? ADORNMENT_OFFSET + OUTLINED_INPUT_OFFSET : ADORNMENT_OFFSET;
-      const offset = (isLeftSide ? leftAffixWidth : rightAffixWidth) + inputModeAdornemntOffset;
       const paddingKey = "padding".concat(captalize(side));
-      if (isWeb) return {
-        [paddingKey]: offset
-      };
+      const affixWidth = isLeftSide ? leftAffixWidth : rightAffixWidth;
+      const padding = typeof paddingHorizontal === 'number' ? paddingHorizontal : inputModeAdornemntOffset;
+      const offset = affixWidth + padding;
       const isAffix = type === AdornmentType.Affix;
       const marginKey = "margin".concat(captalize(side));
       return {
@@ -95,7 +93,8 @@ const TextInputAdornment = ({
   visible,
   topPosition,
   isTextInputFocused,
-  forceFocus
+  forceFocus,
+  paddingHorizontal
 }) => {
   if (adornmentConfig.length) {
     return /*#__PURE__*/React.createElement(React.Fragment, null, adornmentConfig.map(({
@@ -114,7 +113,8 @@ const TextInputAdornment = ({
         key: side,
         side: side,
         testID: "".concat(side, "-").concat(type, "-adornment"),
-        isTextInputFocused
+        isTextInputFocused,
+        paddingHorizontal
       };
 
       if (type === AdornmentType.Icon) {

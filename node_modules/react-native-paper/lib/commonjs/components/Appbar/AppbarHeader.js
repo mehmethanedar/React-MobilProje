@@ -11,7 +11,9 @@ var _reactNative = require("react-native");
 
 var _overlay = _interopRequireDefault(require("../../styles/overlay"));
 
-var _Appbar = _interopRequireWildcard(require("./Appbar"));
+var _AppbarElements = require("./AppbarElements");
+
+var _Appbar = require("./Appbar");
 
 var _shadow = _interopRequireDefault(require("../../styles/shadow"));
 
@@ -104,7 +106,7 @@ const AppbarHeader = props => {
       zIndex,
       elevation
     }, (0, _shadow.default)(elevation)]
-  }, /*#__PURE__*/React.createElement(_Appbar.default, _extends({
+  }, /*#__PURE__*/React.createElement(_AppbarElements.Appbar, _extends({
     style: [//@ts-ignore Types of property 'backgroundColor' are incompatible.
     {
       height,
@@ -115,7 +117,6 @@ const AppbarHeader = props => {
   }, rest)));
 };
 
-exports.AppbarHeader = AppbarHeader;
 AppbarHeader.displayName = 'Appbar.Header';
 
 const styles = _reactNative.StyleSheet.create({
@@ -128,4 +129,7 @@ var _default = (0, _theming.withTheme)(AppbarHeader); // @component-docs ignore-
 
 
 exports.default = _default;
+const AppbarHeaderWithTheme = (0, _theming.withTheme)(AppbarHeader); // @component-docs ignore-next-line
+
+exports.AppbarHeader = AppbarHeaderWithTheme;
 //# sourceMappingURL=AppbarHeader.js.map
