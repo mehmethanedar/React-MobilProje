@@ -3,33 +3,28 @@ import { useState, useEffect } from 'react';
 import { firebase } from '../firebase.js';
 import { View, Text, Image, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import { firestore } from 'firebase';
-import Data from '../screens/Product.js'
 
 
 export default function Card(props) {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([])
-  let a = 0
-  if (a == 0) {
-    useEffect(() => {
-      const usersRef = firebase.firestore().collection('products')
-      usersRef
-        .get()
-        .then(querySnapshot => {
-          console.log('Total users: ', querySnapshot.size);
+  useEffect(() => {
+    const usersRef = firebase.firestore().collection('products')
+    usersRef
+      .get()
+      .then(querySnapshot => {
+        console.log('Total users: ', querySnapshot.size);
 
-          querySnapshot.forEach(documentSnapshot => {
-            products.push(documentSnapshot.data())
-          });
-          setLoading(false);
-
+        querySnapshot.forEach(documentSnapshot => {
+          products.push(documentSnapshot.data())
         });
-      return () => {
-        firestore()
-      }
-    }, [])
-    a++
-  }
+        setLoading(false);
+
+      });
+    return () => {
+      firestore()
+    }
+  }, [])
 
 
   console.log(products)
@@ -57,16 +52,15 @@ export default function Card(props) {
             },
             shadowOpacity: 2.30,
             shadowRadius: 4.3,
-            elevation: 6,
+            elevation: 3,
           }}>
-            <View style={{ flex: 1, width: '100%', height: 180}}>
+            <View style={{ flex: 1, width: '100%', height: 180 }}>
               <TouchableOpacity onPress={() => props.param.navigate('Product', { itemID: item.id, name: item.productName, price: item.productPrice, age: item.productAge })} style={{ width: '100%', height: 80, flex: 1 }}>
                 <Image
                   source={require('../images/urun1.jpg')}
                   style={{
                     width: '100%',
                     height: '100%',
-
                   }}
                 />
               </TouchableOpacity>
@@ -84,14 +78,13 @@ export default function Card(props) {
 
                 <Text style={{ fontSize: 15 }}>{item.productAge} YAŞ</Text>
               </View>
-              <View style={{ alignItems: "center", width: '100%' }}>
-                <TouchableOpacity>
+              <View style={{ alignItems: "center", width: '100%',marginLeft:'60%',marginTop:-5 }}>
+                <TouchableOpacity onPress={() => props.param.navigate('Product', { itemID: item.id, name: item.productName, price: item.productPrice, age: item.productAge })} style={{ width: '100%', height: 80, flex: 1 }}>
                   <Image
                     source={require('../images/sepetAdd.png')}
                     style={{
                       width: 30,
                       height: 30,
-                      marginLeft: 30
                     }}
                   />
                 </TouchableOpacity>

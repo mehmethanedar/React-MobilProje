@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Button, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import FontAwesome5, { FA5Style } from 'react-native-vector-icons/FontAwesome5';
 import Layout from '../components/Layout.js';
 
@@ -9,7 +9,7 @@ export default class Contact extends React.Component {
         return (
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.container}>
-                <Layout param={navigation} />
+                    <Layout param={navigation} />
                     <View style={styles.row}>
                         <Image source={require('../images/logo.png')} style={{ height: 76, width: 200, marginTop: 100, marginBottom: 30 }} />
                     </View>
@@ -19,17 +19,6 @@ export default class Contact extends React.Component {
                             Uğurmumcu Mh. N Cd. No:55/57A Sultangazi/İstanbul
                     </Text>
                     </View>
-                    <View style={styles.line} />
-                    <TouchableOpacity>
-                        <View style={styles.row}>
-                            <FontAwesome5 name='map-marked-alt' size={35} style={styles.awesome} />
-
-                            <Text style={styles.txt}>
-                                Haritada Göster
-                        </Text>
-
-                        </View>
-                    </TouchableOpacity>
                     <View style={styles.line} />
                     <View style={styles.row}>
                         <FontAwesome5 name='phone' size={35} style={styles.awesome} />
@@ -85,9 +74,6 @@ export default class Contact extends React.Component {
                     </Text>
 
                     </View>
-
-                    <Button onPress={() => navigation.navigate('Ana Sayfa')} title="Ana Sayfa" />
-
                 </View>
             </ScrollView>
         );

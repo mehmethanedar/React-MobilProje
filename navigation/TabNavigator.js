@@ -10,10 +10,12 @@ const CartTabNavigator = () => {
     return (
         <Tab.Navigator
             initialRouteName="Yaz"
+            
             tabBarOptions={{
                 activeTintColor: '#4bae32',
                 labelStyle: {
                     fontSize: 20,
+                    paddingBottom:10
                   }
             }}
         >

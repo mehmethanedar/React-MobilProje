@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View,StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 
 
 export default function NavigationDrawerOrder(props) {
