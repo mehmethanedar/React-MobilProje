@@ -1,46 +1,37 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { firebase } from '../firebase.js';
-import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { firestore } from 'firebase';
 
-const DATA = [
-  {
-    id: '1-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'birim 1',
-  },
-  {
-    id: '2-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'birim 2',
-  },
-  {
-    id: '3-3da1-471f-bd96-145571e29d72',
-    title: 'birim 3',
-  },
-  {
-    id: '4-3da1-471f-bd96-145571e29d72',
-    title: 'birim 3',
-  },
-  {
-    id: '5-3da1-471f-bd96-145571e29d72',
-    title: 'birim 3',
-  },
-];
 
 export default function Card(props) {
+  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([])
 
-  const [products, setUsers] = useState([])
+  useEffect(() => {
+    const usersRef = firebase.firestore().collection('products')
+    usersRef
+      .get()
+      .then(querySnapshot => {
+        console.log('Total users: ', querySnapshot.size);
 
-  const usersRef = firebase.firestore().collection('products')
-  usersRef
-    .get()
-    .then(querySnapshot => {
-      console.log('Total users: ', querySnapshot.size);
+        querySnapshot.forEach(documentSnapshot => {
+          products.push(documentSnapshot.data())
+        });
+        setProducts(products);
+        setLoading(false);
 
-      querySnapshot.forEach(documentSnapshot => {
-        products.push(documentSnapshot.data())
       });
+    return () => {
+      firestore()
+    }
+  }, [])
 
-    });
+  console.log(products)
+  if (loading) {
+    return <ActivityIndicator />;
+  }
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center", height: '100%', margin: 7, width: '100%' }}>
@@ -68,7 +59,7 @@ export default function Card(props) {
                   style={{
                     width: 180,
                     height: 180,
-                    
+
                   }}
                 />
               </TouchableOpacity>
@@ -80,10 +71,10 @@ export default function Card(props) {
             <View style={{ justifyContent: 'center', marginTop: 10, marginBottom: 5 }}>
               <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{item.productName}</Text>
             </View>
-            <View style={{ height: 1,marginBottom:5, width: '100%', backgroundColor: 'black', opacity: .2 }} />
+            <View style={{ height: 1, marginBottom: 5, width: '100%', backgroundColor: 'black', opacity: .2 }} />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: "center", width: '100%' }}>
               <View style={{ marginLeft: 8 }}>
-              
+
                 <Text style={{ fontSize: 15 }}>{item.productAge} YAŞ</Text>
               </View>
               <View style={{ alignItems: "center", width: '100%' }}>

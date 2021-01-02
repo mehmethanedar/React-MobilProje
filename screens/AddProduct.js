@@ -40,7 +40,7 @@ export default function AddProduct({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Layout />
+            <Layout param={navigation} />
             <View>
                 <TextInput
                     style={styles.input}
@@ -82,7 +82,7 @@ export default function AddProduct({ navigation }) {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => urunEkle()}>
-                    <Text style={styles.buttonTitle}>Hesap Oluştur</Text>
+                    <Text style={styles.buttonTitle}>Ürün Ekle</Text>
                 </TouchableOpacity>
             </View>
             <View>

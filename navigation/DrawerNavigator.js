@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Contact from '../screens/Contact.js';
-import Cart from '../screens/Cart.js';
 import AddProduct from '../screens/AddProduct.js';
 import LogOut from '../screens/LogOut.js'
-import { MyStack, ProductsStack, HomeStack } from './StackNavigator.js';
+import { MyStack, HomeStack } from './StackNavigator.js';
 import CustomDrawerContent from '../components/CustomDrawerContent.js';
 import { firebase } from '../firebase.js'
+import Products from '../screens/Products.js';
+import CartTabNavigator from './TabNavigator.js';
 
 
 const Drawer = createDrawerNavigator();
@@ -58,11 +58,10 @@ export default function MyDrawer() {
             }}
             drawerContent={props => <CustomDrawerContent {...props} />}>
             <Drawer.Screen name="Ana Sayfa" component={HomeStack} />
-            <Drawer.Screen name="Sepetim" component={Cart} />
-            <Drawer.Screen name="İletişim" component={Contact} />
+            <Drawer.Screen name="Sepetim" component={CartTabNavigator} />
             {userID == "admin" && firebase.auth().currentUser
-                ? (<Drawer.Screen name="Urun Ekle" component={AddProduct} />)
-                : (<Drawer.Screen name="Ürünler" component={ProductsStack} />)
+                ? (<Drawer.Screen name="Ürün Ekle" component={AddProduct} />)
+                : (<Drawer.Screen name="Ürünler" component={Products} />)
             }
 
 

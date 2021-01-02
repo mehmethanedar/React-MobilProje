@@ -4,7 +4,6 @@ import Card from '../components/Card';
 import Layout from '../components/Layout';
 
 export default function Products({ navigation }) {
-    navigation.navigate('Urun')
     return (
         <View style={{ flex: 1 }}>
             <Layout param={navigation} />
