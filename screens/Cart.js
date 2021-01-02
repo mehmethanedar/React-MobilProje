@@ -4,20 +4,23 @@ import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
 import Layout from '../components/Layout.js';
 
 export default function Cart({ navigation, route }) {
-    const [loading, setLoading] = useState(true);
     const [data, setData] = useState([])
-    const { itemID, name, price, age, adet } = route.params;
-    const [a, seta] = useState([])
-    data.push(route.params)
+    let toplamTemp = 0;
+    if (route.params) {
+        console.log(route.params)
+        const { itemID, name, price, age, adet } = route.params;
+        data.push(route.params)
+        alert(name + ' sepetinize eklendi.')
 
-    alert(name + ' sepetinize eklendi.')
-
-    const toplamArray = data.map((item) => item.price*item.adet);
-    let toplamTemp=0;
-    for (let i = 0; i < toplamArray.length; i++) {
-        toplamTemp = toplamTemp + toplamArray[i];
+        const toplamArray = data.map((item) => item.price * item.adet);
+        
+        for (let i = 0; i < toplamArray.length; i++) {
+            toplamTemp = toplamTemp + toplamArray[i];
+        }
     }
     const toplam = toplamTemp;
+
+   
 
     return (
         <View style={{ flex: 1 }}>

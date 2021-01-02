@@ -12,7 +12,7 @@ export default function Layout(props) {
                 />                
             </View>
             <View>
-            <Text style={{ fontWeight: 'bold', color: '#fff', marginVertical: 15 }}>Trilya</Text>
+            <Text style={{ fontWeight: 'bold', color: '#fff', marginVertical: 15 }}>Triliya</Text>
             </View>
 
 
