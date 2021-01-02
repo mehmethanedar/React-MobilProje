@@ -8,25 +8,29 @@ import { firestore } from 'firebase';
 export default function Card(props) {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([])
-
-  useEffect(() => {
-    const usersRef = firebase.firestore().collection('products')
-    usersRef
-      .get()
-      .then(querySnapshot => {
-        console.log('Total users: ', querySnapshot.size);
-
-        querySnapshot.forEach(documentSnapshot => {
-          products.push(documentSnapshot.data())
+  let a=0
+  if (a==0) {
+    useEffect(() => {
+      const usersRef = firebase.firestore().collection('products')
+      usersRef
+        .get()
+        .then(querySnapshot => {
+          console.log('Total users: ', querySnapshot.size);
+  
+          querySnapshot.forEach(documentSnapshot => {
+            products.push(documentSnapshot.data())
+          });
+          setProducts(products);
+          setLoading(false);
+  
         });
-        setProducts(products);
-        setLoading(false);
-
-      });
-    return () => {
-      firestore()
-    }
-  }, [])
+      return () => {
+        firestore()
+      }
+    }, [])
+    a++
+  }
+  
 
   console.log(products)
   if (loading) {
@@ -39,20 +43,23 @@ export default function Card(props) {
         data={products}
         numColumns={2}
         keyExtractor={(item) => { item.id }}
+        style={{width:'100%'}}
         scrollEnabled={false}
         renderItem={({ item }) => (
           <View style={{
-            height: 300, backgroundColor: "rgba(236,236,236,0.1)", marginHorizontal: 15, marginVertical: 20, padding: 15, flex: 1, alignItems: 'center', justifyContent: 'center', width: '100%',
+            flex:1,
+            height: 300, backgroundColor: "rgba(236,236,236,0.1)", marginHorizontal: 15, marginVertical: 20, padding: 15, flex: 1, alignItems: 'center', justifyContent: 'center',
+            width: 60,
             shadowColor: "#000",
             shadowOffset: {
               width: 0,
-              height: 4,
+              height: 3,
             },
             shadowOpacity: 0.30,
             shadowRadius: 4.65,
             elevation: 8,
           }}>
-            <View style={{ width: '100%', height: 180, marginTop: 15 }}>
+            <View style={{flex:1, width: '100%', height: 180, marginTop: 15 }}>
               <TouchableOpacity onPress={() => props.param.navigate('Product')} style={{ width: '100%', height: 80, flex: 1 }}>
                 <Image
                   source={require('../images/urun1.jpg')}
