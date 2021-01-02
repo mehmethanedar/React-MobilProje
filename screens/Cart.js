@@ -1,14 +1,18 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { View, Text } from 'react-native';
 import Layout from '../components/Layout.js';
 
 export default function Cart({ navigation, route }) {
-    const { a } = route.params;
-    console.log(a);
+    const [data, setData] = useState([])
+    const { itemID, name, price, age } = route.params;
+    data.push(route.params)
+    console.log(data)
+    alert(name + ' sepetinize eklendi.')
     return (
-        <View >
+        <View>
             <Layout param={navigation} />
-            <Text>Sepetim sayfası</Text>
+            <Text>Sepetim sayfası - {name}</Text>
         </View>
     );
 }

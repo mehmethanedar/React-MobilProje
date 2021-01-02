@@ -1,15 +1,18 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { StackActions } from '@react-navigation/native';
 
 const Data = []
 
 export default function Product({ navigation, route }) {
     const { itemID, name, price, age } = route.params;
-    console.log(itemID)
+
     const sepeteEkle = () => {
-        navigation.navigate('Sepetim', {a: 'itemID'})
+        navigation.navigate('Sepetim', { itemID: itemID, name: name, price: price, age: age })
+        navigation.dispatch(StackActions.popToTop());
     }
+
     return (
         <View style={{ flex: 1, flexDirection: 'column', alignItems: "center", justifyContent: "center", width: '100%' }}>
             <View style={{ flex: 2, width: '100%' }}>
