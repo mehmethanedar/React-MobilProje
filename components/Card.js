@@ -48,24 +48,24 @@ export default function Card(props) {
         renderItem={({ item }) => (
           <View style={{
             flex: 1,
-            height: 300, backgroundColor: "rgba(236,236,236,0.1)", marginHorizontal: 15, marginVertical: 20, padding: 15, flex: 1, alignItems: 'center', justifyContent: 'center',
-            width: 60,
+            height: 300, backgroundColor: "rgba(236,236,236,0.1)", marginHorizontal: 15, marginVertical: 20, padding: 2, flex: 1, alignItems: 'center', justifyContent: 'center',
+            width: '100%',
             shadowColor: "#000",
             shadowOffset: {
               width: 0,
-              height: 3,
+              height: 2,
             },
-            shadowOpacity: 0.30,
-            shadowRadius: 4.65,
-            elevation: 8,
+            shadowOpacity: 2.30,
+            shadowRadius: 4.3,
+            elevation: 6,
           }}>
-            <View style={{ flex: 1, width: '100%', height: 180, marginTop: 15 }}>
+            <View style={{ flex: 1, width: '100%', height: 180}}>
               <TouchableOpacity onPress={() => props.param.navigate('Product', { itemID: item.id, name: item.productName, price: item.productPrice, age: item.productAge })} style={{ width: '100%', height: 80, flex: 1 }}>
                 <Image
                   source={require('../images/urun1.jpg')}
                   style={{
-                    width: 180,
-                    height: 180,
+                    width: '100%',
+                    height: '100%',
 
                   }}
                 />
