@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import FontAwesome5, { FA5Style } from 'react-native-vector-icons/FontAwesome5';
 import Layout from '../components/Layout.js';
+import Notify from '../components/Notify.js'
 
 export default class Contact extends React.Component {
     render() {
@@ -75,6 +76,7 @@ export default class Contact extends React.Component {
 
                     </View>
                 </View>
+                <Notify/>
             </ScrollView>
         );
     }

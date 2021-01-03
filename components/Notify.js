@@ -33,7 +33,7 @@ export default function Notify() {
 
 function enableNotification() {
     Notifications.cancelAllScheduledNotificationsAsync();
-    scheduleNotification("Drink some water fam!", 20, 58);
+    scheduleNotification("Uygulamamızdaki yeni ürünlere göz atmayı unutmayın!", 4, 31);
 }
 
 function scheduleNotification(title, hour, minute) {
